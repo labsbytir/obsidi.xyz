@@ -1,0 +1,9 @@
+---
+import Reader from "../layouts/Reader.astro";
+import { SampleReader } from "../components/SampleReader";
+export const prerender = true;
+---
+
+<Reader title="Field notes — sample vault">
+  <SampleReader client:load />
+</Reader>

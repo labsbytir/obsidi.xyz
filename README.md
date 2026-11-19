@@ -4,7 +4,7 @@ An Obsidian-vault hosting SaaS for private notebook storage and deliberate publi
 
 ## Current status
 
-The design and implementation plan are approved. The local Astro/Workers runtime and test foundation are implemented; SaaS features and production deployment remain in progress.
+The design and implementation plan are approved. The local Astro/Workers runtime, screenshot-grounded interface system, landing page, and interactive sample reader are implemented. Authentication and the remaining SaaS features are still in progress; nothing has been deployed by this work.
 
 OpenSpec is the source of truth:
 
@@ -23,6 +23,8 @@ npm run dev
 ```
 
 See [development and verification](docs/operations/development.md) for isolated tests and resource boundaries.
+
+The implemented [UI system](docs/ui-system.md) uses 18 rendered shadcn component types and self-hosted JetBrains Mono v2.304. Local pages: `/`, `/sample`, `/docs`, `/pricing`.
 
 ## Review progress
 

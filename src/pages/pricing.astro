@@ -1,0 +1,26 @@
+---
+import Marketing from "../layouts/Marketing.astro";
+import { Badge } from "../components/ui/badge";
+export const prerender = true;
+---
+
+<Marketing title="Pricing">
+  <article class="article">
+    <Badge variant="outline">Not open for billing</Badge>
+    <h1>Clear limits. No invented prices.</h1>
+    <p>
+      Plans and included allowances are being finalized. Registration and live
+      checkout are not available in this frontend milestone.
+    </p>
+    <p>
+      Before billing opens, this page will show the recurring price, storage
+      allowance, public traffic policy, API and MCP usage limits, and any
+      approved overage rates.
+    </p>
+    <p>
+      There are no charges or payment forms on this page. In the meantime,{" "}
+      <a href="/sample">read the sample vault</a> or{" "}
+      <a href="/docs">explore the publishing workflow</a>.
+    </p>
+  </article>
+</Marketing>

@@ -1,0 +1,50 @@
+---
+import Marketing from "../layouts/Marketing.astro";
+export const prerender = true;
+---
+
+<Marketing title="Publishing">
+  <article class="article">
+    <h1>A notebook, not a new workflow.</h1>
+    <p>
+      The full hosting application is in development. This guide describes the
+      approved publishing workflow; the{" "}
+      <a href="/sample">public sample reader</a> is available now.
+    </p>
+    <h2>Bring your vault</h2>
+    <p>
+      Import a ZIP containing Markdown and supported images or text attachments.
+      The initial import limit is 20 MiB compressed. Obsidian configuration,
+      plugins, hidden files, and active document formats are excluded.
+    </p>
+    <h2>Choose what becomes public</h2>
+    <p>
+      Your original files stay private. Preview the notes and attachments
+      selected for a public release. A release becomes public only after
+      explicit confirmation.
+    </p>
+    <h2>Keep your options</h2>
+    <p>
+      Update a notebook with a new import. Replace a release, unpublish it, or
+      export your original Markdown and attachments. Already downloaded copies
+      cannot be recalled.
+    </p>
+    <h2>Know what you use</h2>
+    <p>
+      The planned dashboard separates hosted storage, public page views, API
+      operations, and MCP tool invocations. Estimated traffic is labeled
+      separately from exact quota accounting.
+    </p>
+    <h2>For developers</h2>
+    <p>
+      Account-owned API keys and explicitly approved MCP agents are part of the
+      implementation plan. They are not enabled in this frontend milestone.
+    </p>
+    <p>
+      <a href="https://github.com/labsbytir/obsidi.xyz/tree/sandbox/openspec/changes/build-obsidi-saas">
+        Read the complete product specification
+      </a>
+      .
+    </p>
+  </article>
+</Marketing>

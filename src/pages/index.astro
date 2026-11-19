@@ -1,23 +1,58 @@
 ---
+import Marketing from "../layouts/Marketing.astro";
+import { buttonVariants } from "../components/ui/button";
+import { ProductPreviews } from "../components/ProductPreviews";
 export const prerender = true;
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta
-      name="description"
-      content="Private Obsidian vault hosting and deliberate public publishing."
-    />
-    <title>obsidi.xyz</title>
-  </head>
-  <body>
-    <main>
-      <h1>obsidi.xyz</h1>
-      <p>Private notebooks. Deliberate publishing.</p>
-      <p>The application is in development.</p>
-    </main>
-  </body>
-</html>
+<Marketing title="A home for your notes">
+  <section class="hero">
+    <h1>
+      Your notes.
+      <br />
+      Your domain.
+    </h1>
+    <p class="hero-copy">
+      A home for your Obsidian notebooks. Keep your vault private, open a door
+      to selected notes, and let your ideas find their readers.
+    </p>
+    <div class="actions">
+      <a
+        href="/sample"
+        data-slot="button"
+        class={buttonVariants({ size: "lg" })}
+      >
+        Read a sample vault
+      </a>
+      <a
+        href="/docs"
+        data-slot="button"
+        class={buttonVariants({ variant: "outline", size: "lg" })}
+      >
+        Explore publishing
+      </a>
+    </div>
+  </section>
+  <section aria-label="A closer look at the product">
+    <ProductPreviews />
+  </section>
+  <section class="reading-intro">
+    <h2>Less between a thought and its reader.</h2>
+    <div class="text-muted-foreground">
+      <p class="mb-5">
+        No new editor to learn. No feed to keep up with. Your Markdown, internal
+        links, and folders remain the way you think.
+      </p>
+      <p>
+        obsidi.xyz is being built around one boundary: what stays yours, and
+        what you choose to share.
+      </p>
+      <a
+        href="/docs"
+        class="mt-6 inline-block text-foreground underline underline-offset-4"
+      >
+        How publishing works
+      </a>
+    </div>
+  </section>
+</Marketing>

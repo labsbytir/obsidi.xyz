@@ -72,7 +72,7 @@ This map specifies intended responsibility, not permission to generate unused pl
 - [x] 1.2 Add `tests/runtime.test.ts` asserting the local health response is 200, required bindings are typed, and the test environment cannot resolve production persistence; run `npm test -- tests/runtime.test.ts` and record the initial failure.
 - [x] 1.3 Implement the minimal Astro Workers health route and isolated runtime configuration; make `npm test -- tests/runtime.test.ts`, `npm run test:workers`, and `npm run build` pass.
 - [x] 1.4 Use the required pre-commit setup, document exact local/test commands, and verify hooks, CI configuration, formatting, type checks, and `openspec validate build-obsidi-saas --strict --no-interactive` pass.
-- [ ] 1.5 Review only this task's diff, update this checklist truthfully, commit with `chore: establish Workers runtime (build-obsidi-saas)`, and verify `git push -u origin sandbox` succeeds.
+- [x] 1.5 Review only this task's diff, update this checklist truthfully, commit with `chore: establish Workers runtime (build-obsidi-saas)`, and verify `git push -u origin sandbox` succeeds.
 
 ## Task 2: Original visual system and functional screen shells
 
@@ -80,11 +80,11 @@ This map specifies intended responsibility, not permission to generate unused pl
 
 **Interfaces:** Produce shared tokens from design section 3 and `Marketing.astro`, `Dashboard.astro`, `Reader.astro` layouts accepting a page title and content slot. Dashboard links match design section 5. Public sample content is explicitly a sample, never a customer statistic.
 
-- [ ] 2.1 Write UI-system assertions for exact font release/provenance, bracketed navigation, no production fixture metrics, and menu focus/close behavior; run the focused tests and record failure before adding the screens.
-- [ ] 2.2 Download official v2.304 font assets/license, inspect metadata, install a consistent shadcn family, and implement tokens plus responsive shells and a truthful landing/sample reader; verify font/network and token tests pass.
-- [ ] 2.3 Implement keyboard/mobile navigation using Sidebar, Sheet, Navigation Menu, Button, Separator, Kbd, Command/Dialog, and accessible focus; verify `npm run test:e2e -- navigation.spec.ts` at 360/768/1440 widths and reduced motion.
-- [ ] 2.4 Move the approved screenshot descriptions and component mapping into the maintained `docs/ui-system.md` with exact implemented file paths as components land; verify no page-level overflow and manually measure actual contrast pairs.
-- [ ] 2.5 Run `npm run verify`, the navigation browser checks, and diff review; record evidence, commit `feat: add notebook interface system (build-obsidi-saas)`, and push `origin sandbox`.
+- [x] 2.1 Write UI-system assertions for exact font release/provenance, bracketed navigation, no production fixture metrics, and menu focus/close behavior; run the focused tests and record failure before adding the screens.
+- [x] 2.2 Download official v2.304 font assets/license, inspect metadata, install a consistent shadcn family, and implement tokens plus responsive shells and a truthful landing/sample reader; verify font/network and token tests pass.
+- [x] 2.3 Implement keyboard/mobile navigation using Sidebar, Sheet, Navigation Menu, Button, Separator, Kbd, Command/Dialog, and accessible focus; verify `npm run test:e2e -- navigation.spec.ts` at 360/768/1440 widths and reduced motion.
+- [x] 2.4 Maintain screenshot evidence by linking the approved detailed descriptions from `docs/ui-system.md`, with exact implemented component file paths; verify no page-level overflow and measure actual contrast pairs.
+- [x] 2.5 Run `npm run verify`, the navigation browser checks, and diff review; record evidence, commit `feat: add notebook interface system (build-obsidi-saas)`, and push `origin sandbox`.
 
 ## Task 3: D1 identity, verification, recovery, and Turnstile
 

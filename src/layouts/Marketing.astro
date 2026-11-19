@@ -1,0 +1,31 @@
+---
+import Base from "./Base.astro";
+import { SiteNavigation } from "../components/SiteNavigation";
+import { HeaderNavigation } from "../components/HeaderNavigation";
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description } = Astro.props;
+---
+
+<Base title={title} description={description}>
+  <SiteNavigation currentPath={Astro.url.pathname} client:load />
+  <main id="main" class="page-main">
+    <header class="topline">
+      <p class="topline-note">A notebook, with an open door.</p>
+      <HeaderNavigation client:load />
+    </header>
+    <slot />
+    <footer class="page-footer">
+      <span>obsidi.xyz</span>
+      <span>Markdown in. Your words out.</span>
+      <a
+        href="https://github.com/labsbytir/obsidi.xyz"
+        class="underline underline-offset-4"
+      >
+        Open source
+      </a>
+    </footer>
+  </main>
+</Base>
