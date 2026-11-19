@@ -10,7 +10,7 @@
 
 **Spec:** `openspec/changes/build-obsidi-saas/design.md` and every `specs/*/spec.md` beneath this change.
 
-**Plan state:** Design approved. Implementation not started. Plan review and execution-method selection pending.
+**Plan state:** Design and plan approved. Native execution selected through the plan-review form. Implementation in progress; checkboxes are the completion record.
 
 ## Global Constraints
 
@@ -62,19 +62,19 @@ This map specifies intended responsibility, not permission to generate unused pl
 - `docs/operations/`, `docs/ui-system.md`, `docs/developer-api.md`: runnable operator and product guidance.
 - `public/fonts/`: pinned WOFF2 assets and license.
 
-## 1. Runtime, test harness, and repository guardrails
+## Task 1: Runtime, test harness, and repository guardrails
 
 **Files:** Create `package.json`, lockfile, `astro.config.ts`, `tsconfig.json`, `wrangler.jsonc`, `vitest.config.ts`, `playwright.config.ts`, `tests/runtime.test.ts`, `.gitignore`, pre-commit/format configuration, `.github/workflows/checks.yml`, and `docs/operations/development.md`. Run requested Gadget initialization only after inspecting its generated changes; preserve Ollama embedding configuration and record index unavailability rather than silently switching providers.
 
 **Interfaces:** Produce commands `npm run check`, `npm run format:check`, `npm test`, `npm run test:workers`, `npm run test:e2e`, `npm run build`, `npm run deploy:preview`; all test/preview persistence defaults to local or isolated resources. `npm run verify` composes the non-browser code gates and strict OpenSpec validation. Production deploy must be a deliberate separate command.
 
-- [ ] 1.1 Inspect current package availability and Cloudflare/Astro guidance, initialize only required tooling, and verify pinned installation succeeds without native SQLite or unrelated dependencies.
-- [ ] 1.2 Add `tests/runtime.test.ts` asserting the local health response is 200, required bindings are typed, and the test environment cannot resolve production persistence; run `npm test -- tests/runtime.test.ts` and record the initial failure.
-- [ ] 1.3 Implement the minimal Astro Workers health route and isolated runtime configuration; make `npm test -- tests/runtime.test.ts`, `npm run test:workers`, and `npm run build` pass.
-- [ ] 1.4 Use the required pre-commit setup, document exact local/test commands, and verify hooks, CI configuration, formatting, type checks, and `openspec validate build-obsidi-saas --strict --no-interactive` pass.
+- [x] 1.1 Inspect current package availability and Cloudflare/Astro guidance, initialize only required tooling, and verify pinned installation succeeds without native SQLite or unrelated dependencies.
+- [x] 1.2 Add `tests/runtime.test.ts` asserting the local health response is 200, required bindings are typed, and the test environment cannot resolve production persistence; run `npm test -- tests/runtime.test.ts` and record the initial failure.
+- [x] 1.3 Implement the minimal Astro Workers health route and isolated runtime configuration; make `npm test -- tests/runtime.test.ts`, `npm run test:workers`, and `npm run build` pass.
+- [x] 1.4 Use the required pre-commit setup, document exact local/test commands, and verify hooks, CI configuration, formatting, type checks, and `openspec validate build-obsidi-saas --strict --no-interactive` pass.
 - [ ] 1.5 Review only this task's diff, update this checklist truthfully, commit with `chore: establish Workers runtime (build-obsidi-saas)`, and verify `git push -u origin sandbox` succeeds.
 
-## 2. Original visual system and functional screen shells
+## Task 2: Original visual system and functional screen shells
 
 **Files:** Create `src/styles/global.css`, three layouts from the File Map, landing/sample/docs pages, `src/components/ui/` used primitives, `public/fonts/`, `docs/ui-system.md`, `tests/ui-system.test.ts`, and `tests/e2e/navigation.spec.ts`.
 
@@ -86,7 +86,7 @@ This map specifies intended responsibility, not permission to generate unused pl
 - [ ] 2.4 Move the approved screenshot descriptions and component mapping into the maintained `docs/ui-system.md` with exact implemented file paths as components land; verify no page-level overflow and manually measure actual contrast pairs.
 - [ ] 2.5 Run `npm run verify`, the navigation browser checks, and diff review; record evidence, commit `feat: add notebook interface system (build-obsidi-saas)`, and push `origin sandbox`.
 
-## 3. D1 identity, verification, recovery, and Turnstile
+## Task 3: D1 identity, verification, recovery, and Turnstile
 
 **Files:** Create `src/lib/auth/{server,client,identity}.ts`, `src/db/{index,schema}.ts`, generated migrations, `src/middleware.ts`, auth routes/pages/components, email templates, `tests/auth.test.ts`, `tests/workers/auth.integration.test.ts`, and `docs/operations/authentication.md`.
 
@@ -98,7 +98,7 @@ This map specifies intended responsibility, not permission to generate unused pl
 - [ ] 3.4 Add a direct-island authorization integration test, enforce verification on publishing/checkout, and document required secrets, local setup, token redaction, and operator identity separation; verify focused identity/CSRF/isolation tests.
 - [ ] 3.5 Run `npm run verify` and auth browser checks; update progress, commit `feat: add UUID account authentication (build-obsidi-saas)`, and push `origin sandbox`.
 
-## 4. Private R2 domain model and atomic storage reservations
+## Task 4: Private R2 domain model and atomic storage reservations
 
 **Files:** Create vault/revision/file/reservation/application-audit schema additions, `src/lib/storage/{objects,reservations}.ts`, `src/lib/vaults/repository.ts`, `src/lib/operations/audit.ts`, vault create/list/detail endpoints, `tests/storage.test.ts`, `tests/workers/storage.integration.test.ts`, and `docs/operations/storage.md`.
 
@@ -110,7 +110,7 @@ This map specifies intended responsibility, not permission to generate unused pl
 - [ ] 4.4 Inspect bucket access/custom domains/CORS/lifecycle/object inventory, retain private settings and existing seven-day multipart cleanup, and document readback evidence; verify no public endpoint, no wildcard CORS, and no newly destructive lifecycle rule.
 - [ ] 4.5 Run `npm run verify` and the two-user storage browser flow; update progress, commit `feat: isolate tenant vault storage (build-obsidi-saas)`, and push `origin sandbox`.
 
-## 5. Bounded archive ingestion and safe Obsidian rendering
+## Task 5: Bounded archive ingestion and safe Obsidian rendering
 
 **Files:** Create `src/lib/vaults/{archive,markdown}.ts`, import endpoint/UI, archive/Markdown fixtures under `tests/fixtures/`, `tests/archive.test.ts`, `tests/markdown.test.ts`, Workers import integration tests, and `docs/operations/imports.md`.
 
@@ -122,7 +122,7 @@ This map specifies intended responsibility, not permission to generate unused pl
 - [ ] 5.4 Document supported Obsidian syntax and safe fallbacks for aliases/headings/callouts/embeds; verify a representative notebook renders links and attachments correctly and does not expose excluded or private metadata.
 - [ ] 5.5 Run `npm run verify` and import browser checks; if runtime caps are not feasible, amend/approve design before proceeding; otherwise commit `feat: import bounded Obsidian vaults (build-obsidi-saas)` and push.
 
-## 6. Atomic selective publishing and public reader
+## Task 6: Atomic selective publishing and public reader
 
 **Files:** Create `src/lib/vaults/publishing.ts`, publication schema, publishing UI/endpoints, `src/pages/v/[slug]/[...path].astro`, public asset/search endpoints, `tests/publishing.test.ts`, `tests/e2e/reader.spec.ts`, and public-reading documentation.
 
@@ -134,7 +134,7 @@ This map specifies intended responsibility, not permission to generate unused pl
 - [ ] 6.4 Add public-response cache controls and always-on publication checks for notes/assets/search, document inability to recall already downloaded copies, and verify a warm-cache revocation integration test.
 - [ ] 6.5 Run `npm run verify`, reader browser/accessibility checks, and the two-user/public isolation matrix; commit `feat: publish selected vault notes (build-obsidi-saas)` and push.
 
-## 7. Exact usage ledger, Analytics Engine, and dashboard
+## Task 7: Exact usage ledger, Analytics Engine, and dashboard
 
 **Files:** Create `src/lib/usage/{events,queries,ledger}.ts`, usage-operation/counter schema, usage routes/islands/components, `tests/usage.test.ts`, concurrency integration tests, `tests/e2e/usage.spec.ts`, and `docs/operations/usage.md`.
 
@@ -146,7 +146,7 @@ This map specifies intended responsibility, not permission to generate unused pl
 - [ ] 7.4 Build storage/page-view/API/MCP usage UI with Select filters, Chart plus accessible table, Progress, Alert, Skeleton, and truthful empty/error states; document units, acceptance policy, sampling, freshness, and no unapproved traffic charges.
 - [ ] 7.5 Run `npm run verify`, usage browser checks, and live-isolated query evidence; update progress, commit `feat: meter tenant vault usage (build-obsidi-saas)`, and push.
 
-## 8. Stripe test-mode subscriptions and usage export
+## Task 8: Stripe test-mode subscriptions and usage export
 
 **Files:** Create `src/lib/billing/{catalog,stripe,exports}.ts`, generated Stripe plugin schema, webhook/billing routes, billing/pricing UI, `tests/billing.test.ts`, webhook integration tests, and `docs/operations/billing.md`.
 
@@ -158,7 +158,7 @@ This map specifies intended responsibility, not permission to generate unused pl
 - [ ] 8.4 Build honest billing/pricing UI for unavailable/active/past-due/pending/canceled states and document catalog/rate/rounding/tax/grace decisions still required; verify no invented live plan or destructive downgrade behavior.
 - [ ] 8.5 Run `npm run verify` and Stripe test-mode browser/webhook evidence; keep live activation blocked, commit `feat: integrate test-mode subscription billing (build-obsidi-saas)`, and push.
 
-## 9. Self-service API keys and account API
+## Task 9: Self-service API keys and account API
 
 **Files:** Extend auth server/client with `@better-auth/api-key`, generated schema, `src/components/keys/`, account API handlers, `tests/api-keys.test.ts`, API contract integration tests, and `docs/developer-api.md`.
 
@@ -170,7 +170,7 @@ This map specifies intended responsibility, not permission to generate unused pl
 - [ ] 9.4 Add API setup Tabs/code examples with real request/response contracts and errors, verify copy behavior, and run all documented examples against an isolated local account.
 - [ ] 9.5 Run `npm run verify` and key-management browser/API contract checks; commit `feat: add scoped account API keys (build-obsidi-saas)` and push.
 
-## 10. Agent Auth, consent, and real remote MCP
+## Task 10: Agent Auth, consent, and real remote MCP
 
 **Files:** Create `src/lib/agents/{server,capabilities}.ts`, discovery/MCP/device routes, agent management/consent UI, generated Agent Auth schema, `tests/agents.test.ts`, real-client MCP integration tests, and MCP setup documentation.
 
@@ -182,7 +182,7 @@ This map specifies intended responsibility, not permission to generate unused pl
 - [ ] 10.4 Exercise registration, consent, tool calls, expired/revoked access, and mutation denial with a real MCP client; document exact client/package versions and unstable-protocol constraints; retain a production gate if compatibility proof fails.
 - [ ] 10.5 Run `npm run verify` and MCP integration/browser evidence, commit `feat: expose consent-scoped vault MCP (build-obsidi-saas)`, and push only verified work with incomplete external gates still unchecked.
 
-## 11. Cloudflare email domain and production resource wiring
+## Task 11: Cloudflare email domain and production resource wiring
 
 **Files:** Update `wrangler.jsonc`, required generated binding types, email templates/readiness checks, `docs/operations/cloudflare.md`, and nonsecret resource setup evidence/configuration.
 
@@ -194,7 +194,7 @@ This map specifies intended responsibility, not permission to generate unused pl
 - [ ] 11.4 Add failure/redaction/template tests and send one transactional test only to a real owner-approved recipient; document accepted-message versus delivered-inbox evidence and verify verification/reset links use the intended domain.
 - [ ] 11.5 Run `npm run verify`, binding/local/isolated service checks, and preserve readback evidence; commit `chore: wire Cloudflare service resources (build-obsidi-saas)` and push without deploying unready production code.
 
-## 12. Better Auth Infrastructure, audits, and Sentinel
+## Task 12: Better Auth Infrastructure, audits, and Sentinel
 
 **Files:** Extend auth server/client with `@better-auth/infra`, extend the task 4 `src/lib/operations/audit.ts`, add safe activity UI, `tests/operator-security.test.ts`, Sentinel integration tests, and `docs/operations/security.md`.
 
@@ -206,7 +206,7 @@ This map specifies intended responsibility, not permission to generate unused pl
 - [ ] 12.4 Wire vault/key/grant/billing/export/operator application audit records and account-scoped history with bounded pagination; verify required events and no leakage using two accounts.
 - [ ] 12.5 Run `npm run verify`, real Infrastructure dashboard/Sentinel evidence where credentials permit, document unverified blockers, commit `feat: add accountable operator security (build-obsidi-saas)`, and push.
 
-## 13. Export, closure, reconciliation, and recoverable cleanup
+## Task 13: Export, closure, reconciliation, and recoverable cleanup
 
 **Files:** Create `src/lib/vaults/export.ts`, `src/lib/storage/reconcile.ts`, `src/lib/operations/cleanup.ts`, cleanup schema/worker scheduling if required, settings/export/deletion UI, tests for export/recovery, and `docs/operations/recovery.md`.
 
@@ -218,7 +218,7 @@ This map specifies intended responsibility, not permission to generate unused pl
 - [ ] 13.4 Document proposed 24-hour staging/seven-day recovery policies and storage/billing-record exceptions; obtain owner retention approval before enabling automatic deletion, and verify no active publication prefix is expired.
 - [ ] 13.5 Run `npm run verify`, export/closure browser checks, and recovery drills on isolated resources; commit `feat: add vault recovery and lifecycle controls (build-obsidi-saas)` and push.
 
-## 14. Whole-product acceptance and operator handoff
+## Task 14: Whole-product acceptance and operator handoff
 
 **Files:** Complete acceptance tests under `tests/e2e/`, `docs/ui-system.md`, and `docs/operations/{release,rollback}.md`; update only required code defects and this OpenSpec change as verification reveals them.
 
@@ -230,7 +230,7 @@ This map specifies intended responsibility, not permission to generate unused pl
 - [ ] 14.4 Complete copy-pasteable release/rollback/migration/secret-rotation/usage-reconciliation runbooks and verify each safe procedure against isolated resources; explicitly state that Worker rollback does not reverse D1/R2/DNS/email/Stripe changes.
 - [ ] 14.5 Run `npm run verify`, `npm run test:workers`, `npm run test:e2e`, `npm run build`, `git diff --check`, and strict OpenSpec validation, perform an independent whole-branch review under the chosen execution method, then commit/push only passing verified corrections.
 
-## 15. Owner-gated live activation
+## Task 15: Owner-gated live activation
 
 **Files:** Approved commercial catalog, production configuration/secrets, nonsecret release evidence, and final OpenSpec progress. No code is considered production-ready merely because this group exists.
 

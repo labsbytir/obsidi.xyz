@@ -1,0 +1,10 @@
+node_modules
+dist
+.astro
+.wrangler
+.openchamber
+.superpowers
+playwright-report
+test-results
+worker-configuration.d.ts
+package-lock.json

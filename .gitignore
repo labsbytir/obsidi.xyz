@@ -5,3 +5,15 @@ node_modules/
 .opencode-mem/
 dist/
 .DS_Store
+.astro/
+.wrangler/
+.openchamber/
+.superpowers/
+coverage/
+playwright-report/
+test-results/
+.env
+.env.*
+!.env.example
+.dev.vars*
+worker-configuration.d.ts

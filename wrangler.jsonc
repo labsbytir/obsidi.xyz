@@ -1,0 +1,49 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "obsidi-local",
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "compatibility_date": "2026-11-19",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": false,
+  "assets": { "binding": "ASSETS", "directory": "./dist" },
+  "observability": {
+    "enabled": true,
+    "traces": { "enabled": true },
+  },
+  "vars": { "APP_ENV": "local", "APP_URL": "http://127.0.0.1:4321" },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "obsidi-local",
+      "database_id": "00000000-0000-0000-0000-000000000001",
+    },
+  ],
+  "r2_buckets": [{ "binding": "VAULTS", "bucket_name": "obsidi-local" }],
+  "env": {
+    "preview": {
+      "name": "obsidi-preview",
+      "vars": { "APP_ENV": "preview", "APP_URL": "https://preview.obsidi.xyz" },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "obsidi-preview",
+          "database_id": "00000000-0000-0000-0000-000000000002",
+        },
+      ],
+      "r2_buckets": [{ "binding": "VAULTS", "bucket_name": "obsidi-preview" }],
+    },
+    "production": {
+      "name": "obsidi",
+      "workers_dev": true,
+      "vars": { "APP_ENV": "production", "APP_URL": "https://obsidi.xyz" },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "obsidi-xyz",
+          "database_id": "b57c7291-c14d-4db3-aa16-c65ba2aef3c2",
+        },
+      ],
+      "r2_buckets": [{ "binding": "VAULTS", "bucket_name": "obsidi-xyz" }],
+    },
+  },
+}

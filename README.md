@@ -4,7 +4,7 @@ An Obsidian-vault hosting SaaS for private notebook storage and deliberate publi
 
 ## Current status
 
-The design is approved. The full implementation plan is ready for review; application implementation and deployment have not started.
+The design and implementation plan are approved. The local Astro/Workers runtime and test foundation are implemented; SaaS features and production deployment remain in progress.
 
 OpenSpec is the source of truth:
 
@@ -15,7 +15,16 @@ OpenSpec is the source of truth:
 
 The design uses Astro server islands, shadcn/ui, JetBrains Mono v2.304, Cloudflare Workers/R2/D1, Better Auth, Stripe, and tenant-scoped usage analytics.
 
-## Review the plan
+## Run locally
+
+```bash
+npm ci
+npm run dev
+```
+
+See [development and verification](docs/operations/development.md) for isolated tests and resource boundaries.
+
+## Review progress
 
 ```bash
 openspec show build-obsidi-saas

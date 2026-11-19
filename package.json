@@ -1,0 +1,42 @@
+{
+  "name": "obsidi-xyz",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "check": "wrangler types && astro check",
+    "typecheck": "npm run check",
+    "types": "wrangler types",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:workers": "vitest run --config vitest.workers.config.ts",
+    "test:e2e": "playwright test",
+    "build": "astro build",
+    "deploy:preview": "CLOUDFLARE_ENV=preview astro build && wrangler deploy --env preview",
+    "deploy:production": "CLOUDFLARE_ENV=production astro build && wrangler deploy --env production",
+    "verify": "npm run format:check && npm run check && npm test && npm run test:workers && openspec validate build-obsidi-saas --strict --no-interactive",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "14.4.9",
+    "astro": "7.4.13"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "@cloudflare/vitest-plugin": "1.8.5",
+    "@fission-ai/openspec": "2.0.0",
+    "@playwright/test": "1.65.1",
+    "@types/node": "26.6.6",
+    "husky": "9.1.7",
+    "lint-staged": "17.6.1",
+    "prettier": "3.10.1",
+    "prettier-plugin-astro": "1.1.2",
+    "typescript": "5.9.3",
+    "vitest": "5.1.1",
+    "wrangler": "4.165.0"
+  }
+}
