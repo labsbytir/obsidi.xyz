@@ -51,8 +51,10 @@ The small registry state aliases are vendored in `src/styles/shadcn-variants.css
 | Tabs            | Read the note or its original Markdown; `SampleReader.tsx`                                                  |
 | Tooltip         | Public sample explanation, keyboard-focusable; `SampleReader.tsx`                                           |
 | Input Group     | Search input and icon composition; generated `command.tsx`                                                  |
+| Alert           | Form errors and email-state notices; auth forms, verify page                                                |
+| Field           | Accessible label and validation grouping; auth forms                                                        |
 
-This is 18 used types, not 18 completed SaaS features. The sample is explicitly not customer account data. Generated transitive primitives such as Skeleton, Input, and Textarea are not counted unless their UI is actually rendered; future dashboard usage must update this inventory.
+This is 20 used types, not 20 completed SaaS features. The sample is explicitly not customer account data. Generated transitive primitives such as Skeleton, Input, and Textarea are not counted unless their UI is actually rendered; future dashboard usage must update this inventory.
 
 ## States and responsiveness
 
@@ -61,9 +63,9 @@ This is 18 used types, not 18 completed SaaS features. The sample is explicitly 
 - Search: `⌘K` or `Ctrl+K`, title filtering, no-result Empty state, arrow-key selection, Escape, restored trigger focus.
 - Tabs and collapsible folders retain standard keyboard interactions.
 - Markup is server-rendered; React hydrates interaction boundaries. No private data is present in these public screens.
-- `Dashboard.astro` sets private non-cacheable headers but is not itself an authentication boundary; task 3 supplies identity checks before dashboard routes exist.
+- `Dashboard.astro` sets private non-cacheable headers but is not itself an authentication boundary; task 3 supplies identity checks before dashboard routes exist. `requireUser`/`requireVerifiedUser` in `src/lib/auth/server.ts` now provide that boundary, used by `/settings/sessions`.
 
-The landing CTA currently points to the real sample reader, not an unimplemented registration flow. Task 3 introduces signup and updates the acquisition CTA.
+The landing CTA currently points to the real sample reader; signup exists at `/sign-up` and the acquisition CTA updates to registration in task 4's dashboard work.
 
 ## Verification
 

@@ -1,0 +1,15 @@
+---
+import Marketing from "../layouts/Marketing.astro";
+import { SignInForm } from "../components/auth/SignInForm";
+export const prerender = true;
+---
+
+<Marketing title="Sign in">
+  <article class="article">
+    <h1>Welcome back.</h1>
+    <p class="mb-8">
+      New here? <a href="/sign-up">Create an account</a>.
+    </p>
+    <SignInForm client:load />
+  </article>
+</Marketing>

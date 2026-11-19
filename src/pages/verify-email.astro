@@ -1,0 +1,52 @@
+---
+import { env } from "cloudflare:workers";
+import Marketing from "../layouts/Marketing.astro";
+import { Alert, AlertDescription, AlertTitle } from "../components/ui/alert";
+import { createAuth } from "../lib/auth/server";
+
+export const prerender = false;
+
+const token = Astro.url.searchParams.get("token") ?? "";
+const callbackURL = Astro.url.searchParams.get("callbackURL") ?? "/";
+let state: "verified" | "invalid" = "invalid";
+
+if (token) {
+  try {
+    const auth = createAuth(env as never);
+    await auth.api.verifyEmail({ query: { token, callbackURL } });
+    state = "verified";
+  } catch (error) {
+    // A redirect means verification succeeded; anything else is shown below.
+    if (
+      typeof error === "object" &&
+      error !== null &&
+      "statusCode" in error &&
+      (error as { statusCode: number }).statusCode === 302
+    ) {
+      state = "verified";
+    }
+  }
+}
+---
+
+<Marketing title="Verify your email">
+  <article class="article">
+    <h1>Verify your email.</h1>
+    {state === "verified" ? (
+      <Alert>
+        <AlertTitle>Your email is verified</AlertTitle>
+        <AlertDescription>
+          <a href="/sign-in">Sign in</a> to open your notebooks.
+        </AlertDescription>
+      </Alert>
+    ) : (
+      <Alert variant="destructive">
+        <AlertTitle>This link is not valid</AlertTitle>
+        <AlertDescription>
+          Verification links expire after one hour and can only be used once.
+          <a href="/sign-up"> Create a new account</a> or request another link.
+        </AlertDescription>
+      </Alert>
+    )}
+  </article>
+</Marketing>

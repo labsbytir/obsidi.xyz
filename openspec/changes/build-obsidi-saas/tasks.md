@@ -92,11 +92,11 @@ This map specifies intended responsibility, not permission to generate unused pl
 
 **Interfaces:** `createAuth(env: Env)` returns the installed Better Auth instance; `requireUser(request: Request, env: Env): Promise<{id: string; email: string; emailVerified: boolean}>` rejects missing/banned identity. Auth plugins use the D1 Drizzle SQLite adapter and a supported server-side UUID generator. `sendTransactionalEmail(env, {to, template, parameters}): Promise<{messageId: string}>` in `src/lib/email/messages.ts` uses the restricted `EMAIL` binding, with local simulation in tests; task 11 provisions its production binding. Errors retain HTTP status without leaking credentials.
 
-- [ ] 3.1 Add failing tests for UUID stability across email/session changes, cross-site mutation denial, expired/reused verification/reset tokens, and Turnstile missing/invalid/upstream-failure rejection; run focused auth tests red.
-- [ ] 3.2 Generate the installed Better Auth schema for D1 and implement the auth factory, trusted origins/cookies, verification/reset flows, and UUID identity; verify local migrations and `npm run test:workers -- auth.integration.test.ts` pass.
-- [ ] 3.3 Implement usable auth forms, Turnstile widget token lifecycle, accessible retry/errors, sign-out/session revoke, and real email-template hooks; verify browser registration/sign-in/recovery using local email simulation, not production sends.
-- [ ] 3.4 Add a direct-island authorization integration test, enforce verification on publishing/checkout, and document required secrets, local setup, token redaction, and operator identity separation; verify focused identity/CSRF/isolation tests.
-- [ ] 3.5 Run `npm run verify` and auth browser checks; update progress, commit `feat: add UUID account authentication (build-obsidi-saas)`, and push `origin sandbox`.
+- [x] 3.1 Add failing tests for UUID stability across email/session changes, cross-site mutation denial, expired/reused verification/reset tokens, and Turnstile missing/invalid/upstream-failure rejection; run focused auth tests red.
+- [x] 3.2 Generate the installed Better Auth schema for D1 and implement the auth factory, trusted origins/cookies, verification/reset flows, and UUID identity; verify local migrations and `npm run test:workers -- auth.integration.test.ts` pass.
+- [x] 3.3 Implement usable auth forms, Turnstile widget token lifecycle, accessible retry/errors, sign-out/session revoke, and real email-template hooks; verify browser registration/sign-in/recovery using local email simulation, not production sends.
+- [x] 3.4 Add a direct-island authorization integration test, enforce verification on publishing/checkout, and document required secrets, local setup, token redaction, and operator identity separation; verify focused identity/CSRF/isolation tests.
+- [x] 3.5 Run `npm run verify` and auth browser checks; update progress, commit `feat: add UUID account authentication (build-obsidi-saas)`, and push `origin sandbox`.
 
 ## Task 4: Private R2 domain model and atomic storage reservations
 

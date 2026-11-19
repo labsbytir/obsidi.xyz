@@ -3,7 +3,9 @@ import { expect, it } from "vitest";
 import worker from "../worker";
 
 it("serves the health contract inside workerd", async () => {
-  const response = worker.fetch();
+  const response = await worker.fetch(
+    new Request("https://example.test/health")
+  );
   expect(response.status).toBe(200);
   expect(await response.json()).toEqual({
     status: "ok",

@@ -1,0 +1,30 @@
+---
+import { env } from "cloudflare:workers";
+import Marketing from "../../layouts/Marketing.astro";
+import { SessionManager } from "../../components/auth/SessionManager";
+import { requireVerifiedUser } from "../../lib/auth/server";
+
+export const prerender = false;
+
+let authorized = false;
+try {
+  await requireVerifiedUser(Astro.request, env as never);
+  authorized = true;
+} catch (response) {
+  if (response instanceof Response && response.status === 401) {
+    return Astro.redirect("/sign-in");
+  }
+  throw response;
+}
+---
+
+<Marketing title="Sessions">
+  <article class="article">
+    <h1>Where you are signed in.</h1>
+    <p class="mb-8">
+      Each entry is a device or browser holding a session for this account.
+      Revoking a session signs that device out immediately.
+    </p>
+    {authorized && <SessionManager client:load />}
+  </article>
+</Marketing>
